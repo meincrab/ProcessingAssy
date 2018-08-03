@@ -12,9 +12,9 @@ int colorDirectionB = 1;
 void setup() {
   size(500, 500, P3D);
   smooth();
-  xpos = 250;
-  ypos = 0;
-  frameRate(60);
+  xpos = width/2;
+  ypos = height/2;
+  frameRate(30);
 }
 
 void draw() {
@@ -24,33 +24,57 @@ void draw() {
 }
 
 void drawAbox() {
-  fill(255, 153, 255, 204);
-  translate(xpos, ypos, map(noise(a), 0, 1, -1000, 400));
+  float rand = random(7);
+  int randInt = Math.round(rand);
+  switch (randInt) {
+    case 0:
+      fill(255, 230, 0, 0);
+      break;
+    case 1:
+     fill(255, 255, 153, 102);
+     break;
+    case 2:
+     fill(255, 255, 255, 153);
+     break;
+    case 3:
+     fill(255, 255, 255, 153);
+     break;
+    case 4:
+     fill(255, 0, 102, 255);
+     break;
+    case 5:
+     fill(255, 153, 51, 255);
+     break;
+    case 6:
+     fill(255, 255, 51, 204);
+     break;
+  }
+  translate(xpos, ypos, map(noise(a), 0, 1, -400, 400));
   xpos = xpos + (xspeed * xdirection);
   ypos = ypos + (yspeed * ydirection);
-  if (xpos > 500 || xpos < 0) {
+  if (xpos > width || xpos < width) {
     xdirection *= -1;
   }
-  if (ypos > 500 || ypos < 0) {
+  if (ypos > height || ypos < height) {
     ydirection *= -1;
   }
   a += 0.01;
   rotY += 0.01;
-  rotateY(rotY);
-  rotateX(rotY);
+  rotateY(-rotY);
+  rotateX(-rotY);
   box(75);
  //<>//
 }
 
 void drawAsphere() {
   fill(255, 153, 255, 204);
-  translate(xpos, ypos, map(noise(a), 0, 1, -1000, 400));
+  translate(xpos, ypos, map(noise(a), 0, 1, -1000, -500));
   xpos = xpos + (xspeed * xdirection);
   ypos = ypos + (yspeed * ydirection);
-  if (xpos > 500 || xpos < 0) {
+  if (xpos > width || xpos < width) {
     xdirection *= -1;
   }
-  if (ypos > 500 || ypos < 0) {
+  if (ypos > height || ypos < height) {
     ydirection *= -1;
   }
   a += 0.01;
@@ -73,11 +97,11 @@ void setBackground() {
   else if (backColor >= 255 || backColor <= 0) {
    if (colorDirectionS == 1) {
      colorDirectionS *= -1;
-     backColor -= 1;
+     //backColor -= 1;
    }
     else if (colorDirectionS == -1){
      colorDirectionB *= -1;
      backColor += 1;
     }
   }
-}
+} //<>//
