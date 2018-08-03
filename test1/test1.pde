@@ -1,22 +1,26 @@
-/**
- * Bezier. 
- * 
- * The first two parameters for the bezier() function specify the 
- * first point in the curve and the last two parameters specify 
- * the last point. The middle parameters set the control points
- * that define the shape of the curve. 
- */
+int xPos = 100;
 
 void setup() {
-  size(640, 360); 
-  stroke(255);
-  noFill();
+  size(450, 360, P3D);
 }
 
 void draw() {
-  background(0);
-  rect(100,100,50,200);
-  for (int i = 0; i < 200; i += 20) {
-    bezier(mouseX-(i/2.0), 40+i, 410, 20, 440, 300, 240-(i/16.0), 300+(i/8.0));
+  background(100);
+  
+  pushMatrix();
+  translate(width*0.5, height*0.5);
+  rotate(frameCount / 5);
+  polygon(xPos, 0, 82, 3);
+  popMatrix();
+}
+
+void polygon(float x, float y, float radius, int npoints) {
+  float angle = TWO_PI / npoints;
+  beginShape();
+  for (float a = 0; a < TWO_PI; a += angle) {
+    float sx = x + cos(a) * radius;
+    float sy = y + sin(a) * radius;
+    vertex(sx, sy);
   }
+  endShape(CLOSE);
 }
