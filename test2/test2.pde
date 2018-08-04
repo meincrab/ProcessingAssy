@@ -6,6 +6,7 @@ int ydirection = 1;
 float xspeed = 2.2;
 float yspeed = 2.2;
 int backColor = 1;
+int backColorFix = 254;
 int colorDirectionS = 1;
 int colorDirectionB = 1;
 
@@ -15,6 +16,7 @@ SoundFile file;
 
 void setup() {
   fullScreen(P3D);
+  //size(500, 500, P3D);
   file = new SoundFile(this, "iceflow.mp3");
   file.play();
   smooth();
@@ -22,9 +24,23 @@ void setup() {
   ypos = height/2;
   frameRate(30);
   background(0, 255, 0);
+  
 }
-
 void draw() {
+  int m = millis();
+  if (m >= 30000 && m <= 39750) {
+    clear();
+    lights();
+    setBackgroundFixed();
+    drawAsphere();
+    drawAbox();
+    drawAbox();
+    drawAbox();
+    drawAbox();
+    drawAbox();
+    
+    }
+  else if (m < 30000){
   lights();
   setBackground();
   drawAsphere();
@@ -33,7 +49,10 @@ void draw() {
   drawAbox();
   drawAbox();
   drawAbox();
-  
+  }
+  else {
+    exit ();
+  }
 }
 
 void drawAbox() {
@@ -78,23 +97,46 @@ void drawAsphere() {
 void setBackground() {
    if (backColor <= 254 && backColor >= 0 && colorDirectionS== 1) {
     background(backColor);
-    backColor += 1;
+    backColor += 2;
    }
    else if (backColor <= 254 && backColor >= 0 && colorDirectionS== -1){
     background(backColor);
-    backColor -= 1;
+    backColor -= 2;
   }
   else if (backColor >= 255 || backColor <= 0) {
    if (colorDirectionS == 1) {
      colorDirectionS *= -1;
-     //backColor -= 1;
+     //backColor -= 2;
+     
    }
     else if (colorDirectionS == -1){
      colorDirectionB *= -1;
-     backColor += 1;
+     backColor += 2;
     }
   }
 } //<>//
+
+void setBackgroundFixed() {
+   if (backColor <= 254 && backColorFix >= 0 && colorDirectionS== 1) {
+    background(backColorFix);
+    backColorFix += 2;
+   }
+   else if (backColorFix <= 254 && backColorFix >= 0 && colorDirectionS== -1){
+    background(backColorFix);
+    backColorFix -= 1;
+  }
+  else if (backColorFix >= 255 || backColorFix <= 0) {
+   if (colorDirectionS == 1) {
+     colorDirectionS *= -1;
+     backColorFix -= 1;
+     
+   }
+    else if (colorDirectionS == -1){
+     colorDirectionB *= -1;
+     backColorFix += 1;
+    }
+  }
+}
 
 void randomColor(int colorStart, int colorEnd) {
   float rand = random(colorStart, colorEnd);
@@ -128,7 +170,4 @@ void randomColor(int colorStart, int colorEnd) {
      fill(255, 255, 255);
      break;
   }
-}
-void flyingBall() {
-  
 }
