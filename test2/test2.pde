@@ -9,15 +9,19 @@ int backColor = 1;
 int colorDirectionS = 1;
 int colorDirectionB = 1;
 
+
+
 void setup() {
   fullScreen(P3D);
   smooth();
   xpos = width/2;
   ypos = height/2;
   frameRate(30);
+  background(0, 255, 0);
 }
 
 void draw() {
+  lights();
   setBackground();
   //drawAsphere();
   drawAsphere();
@@ -26,35 +30,11 @@ void draw() {
   drawAbox();
   drawAbox();
   drawAbox();
-
+  
 }
 
 void drawAbox() {
-  float rand = random(7);
-  int randInt = Math.round(rand);
-  switch (randInt) {
-    case 0:
-      fill(255, 230, 0, 0);
-      break;
-    case 1:
-     fill(255, 255, 153, 102);
-     break;
-    case 2:
-     fill(255, 255, 255, 153);
-     break;
-    case 3:
-     fill(255, 255, 255, 153);
-     break;
-    case 4:
-     fill(255, 0, 102, 255);
-     break;
-    case 5:
-     fill(255, 153, 51, 255);
-     break;
-    case 6:
-     fill(255, 255, 51, 204);
-     break;
-  }
+  randomColor(0,6);
   translate(xpos, ypos, map(noise(a), 0, 1, -1000, -450));
   xpos = xpos + (xspeed * xdirection);
   ypos = ypos + (yspeed * ydirection);
@@ -64,7 +44,7 @@ void drawAbox() {
   if (ypos > height || ypos < height) {
     ydirection *= -1;
   }
-  a += 0.01;
+  a += 0.001;
   rotY += 0.01;
   rotateY(-rotY);
   rotateX(-rotY);
@@ -73,8 +53,9 @@ void drawAbox() {
 }
 
 void drawAsphere() {
-  fill(255, 153, 255, 204);
-  translate(xpos, ypos, map(noise(a), 0, 1, -400, 400));
+  randomColor(7,8);
+  //noStroke();
+  translate(xpos, ypos, map(noise(a), 0, 1, -400, 1000));
   xpos = xpos + (xspeed * xdirection);
   ypos = ypos + (yspeed * ydirection);
   if (xpos > width || xpos < width) {
@@ -111,3 +92,40 @@ void setBackground() {
     }
   }
 } //<>//
+
+void randomColor(int colorStart, int colorEnd) {
+  float rand = random(colorStart, colorEnd);
+  int randInt = Math.round(rand);
+  switch (randInt) {
+    case 0:
+      fill(255, 0, 0);
+      break;
+    case 1:
+     fill(255, 153, 0);
+     break;
+    case 2:
+     fill(0, 255, 255);
+     break; 
+    case 3:
+     fill(255, 255, 153);
+     break;
+    case 4:
+     fill(204, 51, 255);
+     break;
+    case 5:
+     fill(0, 255, 153);
+     break;
+    case 6:
+     fill(204, 102, 255);
+     break;
+    case 7:
+     fill(0, 0, 0);
+     break;
+    case 8:
+     fill(255, 255, 255);
+     break;
+  }
+}
+void flyingBall() {
+  
+}
