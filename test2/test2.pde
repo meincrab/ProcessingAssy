@@ -16,7 +16,6 @@ SoundFile file;
 
 void setup() {
   fullScreen(P3D);
-  //size(500, 500, P3D);
   file = new SoundFile(this, "iceflow.mp3");
   file.play();
   smooth();
