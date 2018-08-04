@@ -9,10 +9,14 @@ int backColor = 1;
 int colorDirectionS = 1;
 int colorDirectionB = 1;
 
-
+  
+import processing.sound.*;
+SoundFile file;
 
 void setup() {
   fullScreen(P3D);
+  file = new SoundFile(this, "iceflow.mp3");
+  file.play();
   smooth();
   xpos = width/2;
   ypos = height/2;
@@ -23,7 +27,6 @@ void setup() {
 void draw() {
   lights();
   setBackground();
-  //drawAsphere();
   drawAsphere();
   drawAbox();
   drawAbox();
