@@ -10,7 +10,7 @@ int colorDirectionS = 1;
 int colorDirectionB = 1;
 
 void setup() {
-  size(500, 500, P3D);
+  fullScreen(P3D);
   smooth();
   xpos = width/2;
   ypos = height/2;
@@ -19,8 +19,14 @@ void setup() {
 
 void draw() {
   setBackground();
-  drawAbox();
+  //drawAsphere();
   drawAsphere();
+  drawAbox();
+  drawAbox();
+  drawAbox();
+  drawAbox();
+  drawAbox();
+
 }
 
 void drawAbox() {
@@ -49,7 +55,7 @@ void drawAbox() {
      fill(255, 255, 51, 204);
      break;
   }
-  translate(xpos, ypos, map(noise(a), 0, 1, -400, 400));
+  translate(xpos, ypos, map(noise(a), 0, 1, -1000, -450));
   xpos = xpos + (xspeed * xdirection);
   ypos = ypos + (yspeed * ydirection);
   if (xpos > width || xpos < width) {
@@ -68,7 +74,7 @@ void drawAbox() {
 
 void drawAsphere() {
   fill(255, 153, 255, 204);
-  translate(xpos, ypos, map(noise(a), 0, 1, -1000, -500));
+  translate(xpos, ypos, map(noise(a), 0, 1, -400, 400));
   xpos = xpos + (xspeed * xdirection);
   ypos = ypos + (yspeed * ydirection);
   if (xpos > width || xpos < width) {
